@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird</title>
+    <style>
+        html{
+            background-color: rgba(0, 0, 0, 0.56);
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            overflow: hidden;
+        }
+        .parent{
+            border: 1px solid red;
+            display: flex;
+            /* align-items: end; */
+            /* justify-content: end; */
+            flex-direction: column-reverse;
+         }
+        .bird{
+            top: 2%;
+            position: absolute;
+            height: 10%;
+            /* border: 1px solid red; */
+            backface-visibility: hidden;
+        }
+        .phole{
+            position: absolute;
+            width: 10%;
+            height: 60%;
+            background-color: red;
+            
+            /* animation: scrolling 7s infinite linear; */
+        }
+        @keyframes scrolling{
+            0%{
+                left: 100vh;
+            }
+            100%{
+                left: 0;
+            }
+        }
+        .but{
+            position: absolute;
+            top: 90%;
+            left: 46%;
+            padding: 2%;
+            border-radius: 50%;
+            background-color: aqua;
+            color: rgb(51, 56, 60);
+            border: none;
+        }
+        .scroe,.level{
+            position: absolute;
+            width: 20%;
+            height: 7%;
+            color: aliceblue;
+            background-color: rgb(121, 100, 100);
+        }
+        .level{
+            left: 80%;
+        }
+        .star{
+            position: absolute;
+            top: 50%;
+            left: 45%;
+            background-color: aqua;
+        }
+        .body.one .star{
+            display: none;
+        }
+    </style>
+</head>
+
+
+<body class="body">
+    <!-- <img src="bird.gif" alt="" class="bird"> -->
+    <button class="star" onclick="start()">START</button>
+    <span class="scroe"></span>
+    <span class="level"></span>
+    <div class="parent">
+        <div class="phole"></div>
+    </div>
+    <img src="bird.gif" alt="" class="bird bird_1">
+    <button class="but" onclick="clickfun()">click</button>
+
+
+     <script>
+        let parent=document.querySelector(".parent");
+        let a=window.innerHeight;
+        parent.style.height=`${a}px`;
+        let bird=document.querySelector(".bird");
+        
+        let scroe=document.querySelector(".scroe");
+        let level_scroe=document.querySelector(".level");
+        let val_scroe=0;
+        let val_level=0;
+        let val_lev=5;
+        // phole direction cheaing 
+        let n=0;
+        parent.addEventListener("animationiteration",()=>{
+            n+=1;
+            val_scroe+=1;
+            if(n>=2){
+                parent.style.flexDirection="column-reverse"
+                n=0;
+            }
+            else{
+                parent.style.flexDirection="row-reverse"
+            }
+            scroe.innerText=`SCROE    ${val_scroe}`;
+            if(val_scroe>val_lev){
+                val_level+=1;
+                level_scroe.innerText=`LEVEL${val_level}`;
+                val_lev+=5
+            }
+        })
+
+
+        //game over conditions
+
+
+        let time= setInterval(() => {
+
+            // bird values
+
+            let birdtop=document.querySelector(".bird").getBoundingClientRect().top;
+            birdtop=(Math.floor(birdtop));
+
+            let bird_top=document.querySelector(".bird_1").getBoundingClientRect().bottom;
+            bird_top=Math.abs(Math.floor(bird_top));
+            let bird_bottom=document.querySelector(".bird_1").getBoundingClientRect().bottom;
+            bird_bottom=Math.abs(Math.floor(bird_bottom));
+            let bird_left=document.querySelector(".bird_1").getBoundingClientRect().left;
+            bird_left=Math.abs(Math.floor(bird_left));
+            let bird_right=document.querySelector(".bird_1").getBoundingClientRect().right;
+            bird_right=Math.abs(Math.floor(bird_right));
+            
+            //phole values
+            let phole_top=document.querySelector(".phole").getBoundingClientRect().top;
+            let phole_bottom=document.querySelector(".phole").getBoundingClientRect().bottom;
+            phole_bottom=Math.abs(Math.floor(phole_bottom));
+            let phole_left=document.querySelector(".phole").getBoundingClientRect().left;
+            phole_left=Math.abs(Math.floor(phole_left));
+            let phole_right=document.querySelector(".phole").getBoundingClientRect().right;
+            phole_right=Math.abs(Math.floor(phole_right));
+            
+
+            //body top and bottom values
+
+            let body_top=document.querySelector(".body").getBoundingClientRect().top;
+            body_top=Math.abs(Math.floor(body_top));
+            let body_bottom=document.querySelector(".body").getBoundingClientRect().bottom;
+            body_bottom=Math.abs(Math.floor(body_bottom));
+            console.log(bird_top)
+            if(body_top>birdtop){
+                alert(`game over your score is${val_scroe}   `);
+              }
+            if(body_bottom<bird_bottom){
+                alert(`game over your score is${val_scroe}   `);
+            }
+            //(bird_top>=phole_top&&bird_top<=phole_bottom) ||
+            if(((bird_left>=phole_left&&bird_left<=phole_right) ||(bird_right>=phole_left&&bird_right<=phole_right))&&((bird_top>=phole_top&&bird_top<=phole_bottom) || (bird_top<=phole_top&&bird_bottom>=phole_bottom))){
+                alert(`game over your score is${val_scroe}   "     "`);
+                // clearInterval(time)
+            }
+            // console.log("phole top"+phole_top)
+            // console.log("phole bottom"+phole_bottom);       // checking for doubts
+            // console.log("bird top"+bird_top);
+            // console.log("bird bottom"+bird_bottom)
+        }, 1);
+         
+
+        let bird_height=10;
+        function clickfun(){
+            bird_height+=40;
+        }
+        let bird_time=setInterval(()=>{
+            // bird_height-=20;
+            bird.style.marginTop=`${bird_height}px`
+        },200);
+
+
+        function start(){
+        let body =document.querySelector(".body").classList.add('one');
+        let phole1=document.querySelector(".phole");
+        phole1.style.animation="scrolling 7s infinite linear"
+        setTimeout(()=>{
+            setInterval(()=>{
+                bird_height-=20;
+            },200)
+        },10000)
+    }
+        
+    </script>
+</body>
+</html>

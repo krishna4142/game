@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            overflow: hidden;
+        }
+        .parent{
+            min-height: 1000px;
+            border: 10px solid red;
+            display: flex;
+            /* flex-direction: column; */
+        }
+        .phole{
+            position: absolute;
+            width: 10px;
+            height: 60%;
+            background-color: red;
+            margin-top: 200px;
+            /* animation: sai 4s infinite linear; */
+        }
+        @keyframes sai{
+            0%{
+                left: 0;
+            }
+            100%{
+                left: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="phole"></div>
+    </div>
+    
+    <script>
+         let parent=document.querySelector(".parent");
+         console.log(parent)
+        let a=window.innerHeight;
+        console.log(a)
+        // parent.style.height=`${a}px`
+        let phole=document.querySelector(".phole");
+        // phole.style.marginTop="200px"
+    </script>
+</body>
+</html>

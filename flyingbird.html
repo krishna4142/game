@@ -1,0 +1,188 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bird flying</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+             overflow: hidden;
+            min-height: 100vh;
+            border: 1px solid red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bird_head{
+            width: 100%;
+            /* min-height: 100vh; */
+            border: 1px solid green;
+            flex-direction:  row-reverse;
+            /* align-items: center; */
+            display: flex;
+        }
+        .phole ,.hole{
+            width: 8%;
+            height: 500px;
+            background-color: red;
+            position: absolute;
+            animation: flow 7s infinite linear;
+        }
+        .hole{
+            height: 25%;
+            background-color:white;
+            /* border-radius: 30% 3% 0 0; */
+            backface-visibility: hidden;
+            background-blend-mode: screen;
+         }
+        .bird{
+            width: 10%;
+            position: absolute;
+            left: 5%;
+            border: 1px solid red;
+            backface-visibility: hidden;
+            /* background-blend-mode: screen; */
+         }
+        @keyframes flow{
+            0%{
+                left: 150vh;
+            }
+            100%{
+                left: 0;
+            }
+        }
+        .but{
+            position: absolute;
+            top: 90%;
+            border: none;
+            width: 10%;
+            height: 10%;
+            background-color: rgb(38, 83, 122);
+            border-radius: 50%;
+            color: rgba(239, 239, 8, 0.855);
+        }
+        html{
+            background: rgba(37, 118, 72, 0.8);
+            background-repeat:repeat ;
+            animation:repectbackground 5s infinite linear ;
+        }
+        @keyframes repectbackground{
+            0%{
+                background-position-x:100vh ;
+            }
+            100%{
+                background-position-x: -30vh;
+            }
+        }
+    </style>
+ </head>
+ <body class="body">
+    <div class="bird_head">
+        <!-- <img src="bird.gif" alt="" class="bird"> -->
+        <div class="phole"></div>
+        <!-- <div class="hole"></div> -->
+    </div>
+    <img src="bird.gif" alt="" class="bird bird_1">
+    <button class="but" onclick="clickfun()">click</button>
+    <script>
+        let bird_head=document.querySelector(".bird_head");
+         let phole=document.querySelector(".phole");
+        let bird=document.querySelector(".bird");
+        let bird1=document.querySelector(".bird").getBoundingClientRect();
+        console.log(bird1.top)
+         let val=0;
+        let a=window.innerHeight;
+        bird_head.style.height=`${a}px`;
+        // bird_head.style.flexDirection="column-reverse"
+        bird_head.addEventListener("animationiteration",cheingholeheight);
+        function cheingholeheight(){
+            let random=Math.abs(Math.floor(Math.random()*100));
+            // phole.style.top=`${random}%`
+            val+=1;
+            if(val>=2){
+                bird_head.style.flexDirection="column-reverse"
+                val=0;
+            }
+            else{
+                bird_head.style.flexDirection="row-reverse"
+            }
+        }
+         
+        let bird_height=10;
+        function clickfun(){
+            bird_height+=40;
+        }
+        let bird_time=setInterval(()=>{
+            // bird_height-=20;
+            bird.style.marginTop=`${bird_height}px`
+        },200);
+        let n=0;
+        let bird_time1=setInterval(()=>{
+            n+=1;
+            if(n>50){
+                bird_height-=9;
+            }
+             // bird.style.bottom=`${bird_height}px`
+        },100);
+
+        //game over conditions
+
+
+        let time= setInterval(() => {
+
+            // bird values
+
+            let birdtop=document.querySelector(".bird").getBoundingClientRect().top;
+            birdtop=(Math.floor(birdtop));
+
+            let bird_top=document.querySelector(".bird_1").getBoundingClientRect().bottom;
+            bird_top=Math.abs(Math.floor(bird_top));
+            let bird_bottom=document.querySelector(".bird_1").getBoundingClientRect().bottom;
+            bird_bottom=Math.abs(Math.floor(bird_bottom));
+            let bird_left=document.querySelector(".bird_1").getBoundingClientRect().left;
+            bird_left=Math.abs(Math.floor(bird_left));
+            let bird_right=document.querySelector(".bird_1").getBoundingClientRect().right;
+            bird_right=Math.abs(Math.floor(bird_right));
+            
+            //phole values
+            let phole_top=document.querySelector(".phole").getBoundingClientRect().top;
+            let phole_bottom=document.querySelector(".phole").getBoundingClientRect().bottom;
+            phole_bottom=Math.abs(Math.floor(phole_bottom));
+            let phole_left=document.querySelector(".phole").getBoundingClientRect().left;
+            phole_left=Math.abs(Math.floor(phole_left));
+            let phole_right=document.querySelector(".phole").getBoundingClientRect().right;
+            phole_right=Math.abs(Math.floor(phole_right));
+            
+
+            //body top and bottom values
+
+            let body_top=document.querySelector(".body").getBoundingClientRect().top;
+            body_top=Math.abs(Math.floor(body_top));
+            let body_bottom=document.querySelector(".body").getBoundingClientRect().bottom;
+            body_bottom=Math.abs(Math.floor(body_bottom));
+            console.log(bird_top)
+            if(body_top>birdtop){
+                alert("game over");
+              }
+            if(body_bottom<bird_bottom){
+                alert("game over");
+            }
+            //(bird_top>=phole_top&&bird_top<=phole_bottom) ||
+            if(((bird_left>=phole_left&&bird_left<=phole_right) ||(bird_right>=phole_left&&bird_right<=phole_right))&&((bird_top>=phole_top&&bird_top<=phole_bottom) || (bird_top<=phole_top&&bird_bottom>=phole_bottom))){
+                alert("game over sai");
+                // clearInterval(time)
+            }
+            console.log("phole top"+phole_top)
+            console.log("phole bottom"+phole_bottom);
+            console.log("bird top"+bird_top);
+            console.log("bird bottom"+bird_bottom)
+        }, 1);
+         
+        
+    </script>
+ </body>
+ </html>

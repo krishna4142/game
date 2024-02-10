@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sai{
+            /* animation: ss 2s infinite linear; */
+         }
+        @keyframes ss{
+            0%{
+                transform: rotate(10deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- <span class="material-symbols-outlined">
+        published_with_changes
+        </span> -->
+        <span class="material-symbols-outlined sai">
+            cycle
+            </span>
+</body>
+<script>
+    let sai=document.querySelector(".sai");
+    setTimeout(()=>{
+        sai.style.animation="ss 2s infinite linear"
+    },30000)
+</script>
+</html>
