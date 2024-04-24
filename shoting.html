@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .body{
+            border: 1px solid red;
+            overflow: hidden;
+            display: flex;
+            /* flex-direction: column; */
+            /* align-items:center; */
+            justify-content: space-around;
+            background: rgba(13, 1, 1, 0.468);
+             
+        }
+        .left,.right{
+            width: 20%;
+            height: 100%;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+        }
+        .parent{
+            width: 20%;
+            height: 100%;
+            /* border: 1px solid red; */
+            display: flex;
+            align-items: end;
+            justify-content: center;
+             transform-origin: 50% 100%;
+            /* transform: rotate(10deg); */
+        }
+        .child{
+            width: 20%;
+            height: 13%;
+            background: red;
+            border-radius: 90% 90% 0 0;
+            display: flex;
+            justify-content: center;
+        }
+        @keyframes sai{
+            0%{
+                top: 100vh;
+            }
+            100%{
+                top: -100px;
+            }
+        }
+        button{
+            position: absolute;
+        }
+        .bal{
+            width: 2%;
+            height: 2%;
+            background-color: rgb(26, 63, 95);
+            position: absolute;
+            animation: sai 0.2s  1 forwards;
+         }
+         .enimi{
+            width: 10%;
+            height: 8%;
+            background: rgb(7, 182, 230);
+            position: absolute;
+            display: flex;
+            /* border-radius: 50%; */
+         }
+         .en1{
+            animation: bird 3s infinite linear;
+         }
+         .en2{
+            animation: bird 1s infinite linear;
+         }
+         .en3{
+            animation: bird 5s infinite linear;
+         }
+        @keyframes bird{
+            0%{
+                left: 100%;
+                top: 0;
+            }25%{
+                top:30% ;
+                left: 75%;
+            }
+            50%{
+                top: 50%;
+                left: 80%;
+
+            }
+            70%{
+                top: 40%;
+                left: 30%;
+            }
+            100%{
+                top: 0;
+                left: 0;
+            }
+        }
+          
+         
+         .audio{
+            position: absolute;
+            top: 300px;
+            display: none;
+         }
+         .body.one .en1{
+            display: none;
+         }
+         .body.two .en2{
+            display: none;
+         }
+         .body.three .en3{
+            display: none;
+         }
+         .body.fore .en4{
+            display: none;
+         }
+         .body.five .en5{
+            display: none;
+         }
+    </style>
+</head>
+<body class="body">
+    <audio src="blaster-2-81267.mp3" controls class="audio"></audio>
+    <!-- <div class="child">
+        <div class="bal"></div>
+    </div> -->
+    <div class="enimi en1"><img src="ikgai-bird.gif" alt=""></div>
+    <div class="enimi en2"><img src="ikgai-bird.gif" alt=""></div>
+    <div class="enimi en3"><img src="ikgai-bird.gif" alt=""></div>
+    <div class="enimi en4"><img src="ikgai-bird.gif" alt=""></div>
+    <div class="enimi en5"><img src="ikgai-bird.gif" alt=""></div>
+    <div class="left"><button onclick="left()">LEFT</button></div>
+    <div class="parent">
+         <div class="child">
+             <div class="bal"></div>
+        </div>
+    </div>
+     <div class="right"><button onclick="right()">RIGHT</button></div>
+        <script>
+        let body=document.querySelector(".body");
+        let ch=document.querySelector(".child");
+        body.addEventListener("click",()=>{
+            ch.innerHTML=`<div class="bal"></div>`
+            audio.play();
+        })
+
+        let b_Width=window.innerWidth
+        let b_height=window.innerHeight;
+
+        // let body=document.querySelector(".body");
+        body.style.height=`${b_height}px`;
+        body.style.width=`${b_Width}px`
+
+        let bal=document.querySelector(".bal");
+
+        let audio=document.querySelector(".audio");
+        let parent=document.querySelector(".parent");
+        let dire_val=0;
+        function left(){
+            dire_val-=3;
+            if(dire_val<=-90){
+                dire_val=-90;
+            }
+            parent.style.transform=`rotate(${dire_val}deg)`
+        }
+
+        function right(){
+            dire_val+=3;
+            if(dire_val>=90){
+                dire_val=90;
+            }
+            parent.style.transform=`rotate(${dire_val}deg)`
+        }
+        let scroe=0;
+
+        // game over conditions
+        let time=setInterval(()=>{
+            let en1_top=document.querySelector(".en1").getBoundingClientRect().top;
+                en1_top=Math.abs(Math.floor(en1_top));
+            let en1_bottom=document.querySelector(".en1").getBoundingClientRect().bottom;
+                en1_bottom=Math.abs(Math.floor(en1_bottom));
+            let en1_left=document.querySelector(".en1").getBoundingClientRect().left;
+                en1_left=Math.abs(Math.floor(en1_left));
+            let en1_right=document.querySelector(".en1").getBoundingClientRect().right;
+                en1_right=Math.abs(Math.floor(en1_right));
+
+            let en2_top=document.querySelector(".en2").getBoundingClientRect().top;
+                en2_top=Math.abs(Math.floor(en2_top));
+            let en2_bottom=document.querySelector(".en2").getBoundingClientRect().bottom;
+                en2_bottom=Math.abs(Math.floor(en2_bottom));
+            let en2_left=document.querySelector(".en2").getBoundingClientRect().left;
+                en2_left=Math.abs(Math.floor(en2_left));
+            let en2_right=document.querySelector(".en2").getBoundingClientRect().right;
+                en2_right=Math.abs(Math.floor(en2_right));
+
+            let en3_top=document.querySelector(".en3").getBoundingClientRect().top;
+                en3_top=Math.abs(Math.floor(en3_top));
+            let en3_bottom=document.querySelector(".en3").getBoundingClientRect().bottom;
+                en3_bottom=Math.abs(Math.floor(en3_bottom));
+            let en3_left=document.querySelector(".en3").getBoundingClientRect().left;
+                en3_left=Math.abs(Math.floor(en3_left));
+            let en3_right=document.querySelector(".en3").getBoundingClientRect().right;
+                en3_right=Math.abs(Math.floor(en3_right));
+
+            let en4_top=document.querySelector(".en4").getBoundingClientRect().top;
+                en4_top=Math.abs(Math.floor(en4_top));
+            let en4_bottom=document.querySelector(".en4").getBoundingClientRect().bottom;
+                en4_bottom=Math.abs(Math.floor(en4_bottom));
+            let en4_left=document.querySelector(".en4").getBoundingClientRect().left;
+                en4_left=Math.abs(Math.floor(en4_left));
+            let en4_right=document.querySelector(".en4").getBoundingClientRect().right;
+                en4_right=Math.abs(Math.floor(en4_right));
+
+
+            let en5_top=document.querySelector(".en5").getBoundingClientRect().top;
+                en5_top=Math.abs(Math.floor(en5_top));
+            let en5_bottom=document.querySelector(".en5").getBoundingClientRect().bottom;
+                en5_bottom=Math.abs(Math.floor(en5_bottom));
+            let en5_left=document.querySelector(".en5").getBoundingClientRect().left;
+                en5_left=Math.abs(Math.floor(en5_left));
+            let en5_right=document.querySelector(".en5").getBoundingClientRect().right;
+                en5_right=Math.abs(Math.floor(en5_right));
+
+            let bal_top=document.querySelector(".bal").getBoundingClientRect().top;
+                bal_top=Math.abs(Math.floor(bal_top));
+            let bal_bottom=document.querySelector(".bal").getBoundingClientRect().bottom;
+                bal_bottom=Math.abs(Math.floor(bal_bottom));
+            let bal_left=document.querySelector(".bal").getBoundingClientRect().left;
+                bal_left=Math.abs(Math.floor(bal_left));
+            let bal_right=document.querySelector(".bal").getBoundingClientRect().right;
+                bal_right=Math.abs(Math.floor(bal_right));
+
+                if(((bal_left>=en1_left&&bal_left<=en1_right)||(bal_right>=en1_left&&bal_right<=en1_right))&&(bal_top>=en1_top&&bal_top<=en1_bottom)){
+                    // alert("over")
+                    body.classList.add('one');
+                    scroe+=1;
+                }
+                if(((bal_left>=en2_left&&bal_left<=en2_right)||(bal_right>=en2_left&&bal_right<=en2_right))&&(bal_top>=en2_top&&bal_top<=en2_bottom)){
+                    // alert("over")
+                    body.classList.add('two');
+                    scroe+=1;
+                }
+                if(((bal_left>=en3_left&&bal_left<=en3_right)||(bal_right>=en3_left&&bal_right<=en3_right))&&(bal_top>=en3_top&&bal_top<=en3_bottom)){
+                    // alert("over")
+                    body.classList.add('three');
+                    scroe+=1;
+                }
+                if(((bal_left>=en4_left&&bal_left<=en4_right)||(bal_right>=en4_left&&bal_right<=en4_right))&&(bal_top>=en4_top&&bal_top<=en4_bottom)){
+                    // alert("over")
+                    body.classList.add('fore');
+                    scroe+=1;
+                }
+                if(((bal_left>=en5_left&&bal_left<=en5_right)||(bal_right>=en5_left&&bal_right<=en5_right))&&(bal_top>=en5_top&&bal_top<=en5_bottom)){
+                    // alert("over")
+                    body.classList.add('five');
+                    scroe+=1;
+                }
+                if(scroe>=5){
+                    alert("complete the game")
+                    scroe=0
+                }
+             
+        },10)
+    </script>
+</body>
+</html>

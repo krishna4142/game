@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>menu page</title>
+    <title>games</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
@@ -68,6 +68,10 @@
             position: absolute;
             display: none;
         }
+        .image{
+            width: 90%;
+            height: 30%;
+        }
     </style>
 </head>
 <body class="body">
@@ -96,13 +100,13 @@
         let image=document.querySelector(".image");
 
         let n=0;
-        let game_html=["birdgame.html","car.html"]
-        let img_arr=["bird.png","carimg.jpg"];
+        let game_html=["birdgame.html","car.html","tic.html"]
+        let img_arr=["bird.png","carimg.jpg","tic.png"];
 
         function right(){
             n+=1;
-            if(n>=1){
-                n=1;
+            if(n>=2){
+                n=2;
             }
             image.src=img_arr[n];
         }

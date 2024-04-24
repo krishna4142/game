@@ -1,0 +1,60 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bouncing ball</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .parent{
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+
+        }
+        .ball{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            
+        }
+    </style>
+ </head>
+ <body>
+    <div class="parent">
+        <div class="ball"></div>
+    </div>
+    <script>
+        let parent=document.querySelector(".parent");
+        let ball=document.querySelector(".ball");
+
+        let x=0;
+        let y=10;
+
+        let xy=2;
+        let yx=2;
+        let time=setInterval(()=>{
+            x+=xy;
+            y=yx;
+            let ballbot=ball.getBoundingClientRect().bottom;
+            let balltop=ball.getBoundingClientRect().top;
+            if(ballbot>500){
+                xy=-5;
+                yx=-5;
+            }
+            if(balltop<=0){
+                xy=5;
+                yx=5;
+            }
+
+            ball.style.top=`${x}px`
+            ball.style.left=`${x}px`
+        },1)
+    </script>
+ </body>
+ </html>

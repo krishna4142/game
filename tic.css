@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+  background-color: aliceblue;
+}
+body{
+    /* border: 1px solid red; */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.634);
+}
+.parent{
+    width: 40%;
+    height: 40%;
+    border: 15px solid rgb(57, 214, 164);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3%;
+    align-items: center;
+    justify-content: center;
+ }
+.child{
+    width: 30%;
+    height: 30%;
+    display: flex;
+    /* border: 1px solid red; */
+    align-items: center;
+    justify-content: center;
+    font-size: 300%;
+    box-shadow: 0 0 20px white;
+}
+.alert{
+    border: 8px solid rgb(19, 88, 148);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    display: none;
+}
+button{
+    width: 25%;
+    height: 10%;
+    /* border: 1px solid red; */
+    text-align: center;
+    background: wheat;
+    color: black;
+    border-radius: 20% 20% 0 0;
+  }
+  .body.one .alert{
+    display: block;
+  }
+  .body.two .alert{
+    display: block;
+  }
+
+  .body.one .parent{
+    display: none;
+  }
+  .body.two .parent{
+    display: none;
+  }
+  .turn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    top: 10%;
+    height: 10%;
+    width: 20%;
+    border: 5px solid rgb(0, 85, 255);
+    border-radius:  50% 50% 0 0 ;
+  }
+  .ele{
+    font-size: 300%;
+    color: rgb(255, 174, 0);
+    font-weight: bold;
+  }
+  .ss{
+    color: aliceblue;
+  }

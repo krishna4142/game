@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.parent{
+    border: 1px solid red;
+    width: 50%;
+    height: 50%;
+    overflow: hidden;
+}
+html{
+    overflow: hidden;
+}
+body{
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.scroe{
+    width: 50%;
+    height: 15%;
+    border: 1px solid red;
+}
+.direction{
+    width: 50%;
+    height: 20%;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.snake {
+    position: absolute;
+    width: 5%;
+    height: 4% ;
+    /* border: 1px solid red; */
+    background: gray;
+}
+/* @keyframes sai{
+    0%{
+        left: 0;
+    }
+    100%{
+        left: 95%;
+    }
+} */
+
+.direction .c1,.c2,.c3{
+    height: 30%;
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+} 
+.food{
+    width: 7%;
+    height: 7%;
+    background-color: green;
+    position:relative;
+    border-radius: 50%;
+}
+.child{
+    background-color: red;
+    width: 5%;
+    height: 4% ;
+    /* border: 1px solid red; */
+    background: gray;
+}
